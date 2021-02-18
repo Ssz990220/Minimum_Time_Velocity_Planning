@@ -1,0 +1,205 @@
+<!-- ****************  begin introduction: ***************
+This template is NOT MINE, but can be found on:
+NIEHS Web Style Guide: http://www.niehs.nih.gov/styleguide/web/
+*************** end introduction  ***************** -->
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<title>Practical Time-Optimal Trajectory Planning for Robots: a Convex Optimization Approach</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="description" content="trajectory planning,convex optimal control,second order cone programming,path-constrained time-optimal control,path tracking,diederik,diederik verscheure,publications,robotics,contact dynamics,identification of contact dynamics,modelling,environment identification,environment impedance identification,environment contact dynamics identification" />
+<meta name="keywords" content="trajectory planning,convex optimal control,second order cone programming,path-constrained time-optimal control,path tracking,diederik,diederik verscheure,publications,robotics,contact dynamics,identification of contact dynamics,modelling,environment identification,environment impedance identification,environment contact dynamics identification" />
+<meta name="robots" content="index,follow" />
+<link rel="stylesheet" href="../stylesheets/niehs.css" type="text/css" media="screen" />
+</head>
+<body>
+
+<div id="skipnav"><a href="#content-contain">Skip navigation</a></div>
+
+<table cellpadding="0" cellspacing="0" id="brandniehs-contain">
+<tr>
+<td id="brandniehslogo"><a href="http://people.mech.kuleuven.be/~dversche/"><img src="../images/banner1.jpg" alt="" width="404" height="75" /></a></td>
+<td id="brandniehslogo2"><img src="../images/banner2.gif" width="166" height="75" alt="" /></td>
+<td id="brandniehssearch">
+<form method="get" action="http://www.google.be/search" id="brandniehssearch2">
+<input id="searchtext" type="text" name="q" size="15" value="Search" title="Search" maxlength="100" class="brandniehssearchtxt" />
+<input id="searchButton" type="submit" value="Google" class="brandniehssearchtxt" /><br />
+</form>
+</td>
+</tr>
+</table>
+
+<table cellpadding="0" cellspacing="0" id="layout">
+<tr>
+<td colspan="3">
+<div id="titlesite">
+Practical Time-Optimal Trajectory Planning for Robots: a Convex Optimization Approach
+</div>
+<div id="breadcrumbs">
+<a href="../index.html">Home</a> &gt;  Time-optimal trajectory planning
+</div>
+</td>
+</tr>
+<tr>
+<td id="navsite-contain">
+<div id="navsite">
+Ph.D.<ul>
+<li><a href="../publications.html">Publications</a></li>
+<li><a href="../contactident/contactident.html">Identification of contact dynamics</a></li>
+<li><a href="../timeopt/timeopt.html">Time-optimal trajectory planning</a></li>
+<li><a href="../canada/canada.html">Research exchange at McGill</a></li>
+<li><a href="../theses.html">Master's theses</a></li>
+<li><a href="../reports/index.html">Reports</a></li>
+<li><a href="../mindmaps/general.html">Literature overview</a> (<a href="../mindmaps/general-java.html">java</a>)</li>
+<li><a href="../references/references.html">References</a></li>
+</ul>
+Software<ul>
+<li><a href="../exponential/exponential.html">Exponential demo</a></li>
+<li><a href="../euler/euler.html">Euler demo</a></li>
+</ul>
+Personal<ul>
+<li><a href="../cv/cv.html">Curriculum vitae</a></li>
+<li><a href="../picture.html">Picture</a></li>
+</ul>
+<a href="../links.html">Links</a>
+</div>
+</td>
+
+<td id="content-contain" rowspan="2">
+<div id="content">
+<h3>Practical Time-Optimal Trajectory Planning for Robots: a Convex
+Optimization Approach</h3>
+<ul>
+<li>Matlab implementation of the convex time-optimal trajectory planning method<br>
+applied to the examples found in:<br>
+Pfeiffer, F. & Johanni, R., A Concept for Manipulator Trajectory Planning,<br>
+IEEE Journal of Robotics and Automation, 1987, RA-3, 115-123.<br>
+<ul>
+<li>Zip archive: <a href="elbow.zip">elbow.zip</a></li>
+</ul></li>
+<li>Matlab implementation of the convex time-optimal trajectory planning method<br>
+applied to the KUKA 361 industrial manipulator carrying out a writing task.<br>
+<ul>
+<li>Zip archive: <a href="http://www.downloadcounter.com/cgi-bin/download.pl?username=diederikv&account=1">kuka361.zip</a></li>
+<li>Video: <a href="kuka361.avi">kuka361.avi</a><br>
+(12 MB. Should work without special codecs)</li>
+<li>Explanation:<br>
+<a href="kuka361.png"><img src="kuka361_thumb.png"></a><br>
+Fig. 1: A six-DOF KUKA 361 industrial manipulator performing a writing task.<br><br>
+To illustrate the practicality of the method, it is applied to a<br>
+six-DOF KUKA 361 industrial manipulator carrying out a writing task<br>
+(Fig. 1). The objective is to write a text on a plane<br>
+parallel to the XY-plane (Fig. 1), while keeping the<br>
+end-effector oriented in the negative Z-direction at a height of z = 1.2 m.<br>
+
+<a href="kuka361_optecpath_2d.png"><img src="kuka361_optecpath_2d_thumb.png"></a><br>
+Fig. 2: The path in the plane parallel to the XY-plane.<br><br>
+
+The end-effector path parallel to the XY-plane is shown separately<br>
+in Fig. 2, where the value of the path coordinate s in [0,1] along the<br>
+path is shown in steps of 0.05. The motivation for choosing this type of<br>
+path is that it features long smooth segments as well as sharp edges<br>
+at the transitions between different character segments. Therefore, a<br>
+lot of switching is expected to realize the time-optimal trajectory<br>
+such that the grid on which the problem is solved needs to be<br>
+sufficiently fine.<br><br>
+
+<a href="kuka361_torquepath_optecpath_0_0.png"><img src="kuka361_torquepath_optecpath_0_0_thumb.png"></a><br>
+Fig. 3: The joint torques as a function of the path coordinate<br>
+for the first three axes for the path shown in Fig. 1<br><br>
+
+The torques for the more heavily loaded first three axes<br>
+are shown as a function of the path coordinate s in Fig. 3 (s = 0.55 ... 0.8).<br>
+Fig. 3 indicates that a lot of switching is necessary and that the torque for<br>
+axis two, which is heavily loaded by gravity, is saturated for a<br>
+considerable part along the path and therefore the main limitation on<br>
+the acceleration and deceleration ability of the manipulator.<br><br>
+
+<a href="kuka361_jointvelpath_optecpath_0_0.png"><img src="kuka361_jointvelpath_optecpath_0_0_thumb.png"></a><br>
+Fig. 4: The joint velocities as a function of the path coordinate<br>
+for the first three axes for the path shown in Fig. 1<br><br>
+
+To explain the torques, it is useful to look at the joint velocities<br>
+for the first three axes as a function of the path coordinate, which<br>
+are shown in Fig. 4 for s = 0.55 ... 0.8.  Until s = 0.66, the motion<br>
+of the end-effector is outward such that axis two rotates downward, which<br>
+corresponds to a positive joint velocity, while axis three rotates<br>
+upward which corresponds to a negative joint velocity (Fig. 1). At<br>
+s = 0.66, there is a velocity reversal for axes two and three and from<br>
+then on, the end-effector motion is inward and even faster than the outward<br>
+motion (Fig. 4).  This can be explained as follows. The torque acting on axis<br>
+two due to gravity is also downward and thus aids axis two in the acceleration<br>
+phase around s = 0.59 ... 0.61. In this phase, the torque of axis two is positive<br>
+and saturated to achieve a maximum acceleration. However, because the path<br>
+dictates that there must be a velocity reversal for axis two around<br>
+s = 0.66, the velocity of axis two needs to be limited, because the<br>
+gravity torque acting on axis two also limits the deceleration ability.<br>
+It can be seen in Fig. 4 that the velocity for axis two is indeed limited<br>
+between s = 0.61 ... 0.64 and that the torque for axis two is both positive<br>
+and negative. For s = 0.64 ... 0.66, the torque for axis two is negative and<br>
+saturated to achieve a maximum deceleration. Similarly, at s = 0.79, there<br>
+is another velocity reversal for axis two and three, which is again dictated<br>
+by the path. However, for s = 0.7 ... 0.78 the velocity of axis two and three is<br>
+considerably higher, which is partly because the inward motion is over<br>
+a greater distance, but also because the gravity torque acting on axis<br>
+two aids axis two in the deceleration phase. It can be seen that the<br>
+torque for axis two is not saturated during the entire deceleration<br>
+phase for s = 0.78 ... 0.8, unlike the acceleration phase for<br>
+s = 0.69 ... 0.73. In part, this is also caused by the outward position<br>
+of the end-effector, such that axis one requires more torque to decelerate
+and that hence, switching between axis two and one is required in the<br>
+deceleration phase for s = 0.78 ... 0.8.<br>
+</li>
+
+</ul></li>
+</ul>
+</div>
+</td>
+
+<td id="infosite-contain">
+<div id="infosite">
+<ul>
+<li><a href="http://people.mech.kuleuven.be/~bdemeule/convex.html">Convex optimisation</a></li>
+<li><a href="http://opac.libis.be">Library</a></li>
+<li><a href="http://wbib.kuleuven.be">WBib</a></li>
+<li><a href="http://www.sciencedirect.com">Sciencedirect</a></li>
+<li><a href="http://ieeexplore.ieee.org/Xplore/dynhome.jsp">IEEE Explore</a></li>
+<li><a href="http://citeseer.ist.psu.edu/">CiteSeer</a></li>
+<li><a href="http://ijr.sagepub.com/">International Journal of Robotics Research</a></li>
+<li><a href="http://webmail.kuleuven.ac.be">Webmail</a></li>
+</ul>
+</div>
+</td>
+</tr>
+<tr>
+<td id="contact-contain">
+<div id="contact">
+<a href="mailto:diederik at verscheure dot mech dot kuleuven dot be">Contact me</a>
+</div>
+</td>
+<td id="lastmodified-contain">
+<div id="lastmodified">
+<script type="text/javascript" src="../scripts/revisedate-short.js"></script><noscript>Last Modified: March 2005</noscript>
+</div>
+</td>
+</tr>
+</table>
+
+<div id="footerniehs-contain">
+<div id="footerniehs"><a href="http://people.mech.kuleuven.be/~dversche/">Home</a> <a href="../disclaimer.html">Disclaimer</a> <a href="http://my.statcounter.com/project/standard/stats.php?project_id=1606388&amp;guest=1">Stats</a></div>
+<!-- Start of StatCounter Code -->
+<script type="text/javascript">
+var sc_project=1606388;
+var sc_invisible=0;
+var sc_partition=15;
+var sc_security="48e465a6";
+</script>
+<script type="text/javascript" src="http://www.statcounter.com/counter/counter_xhtml.js"></script><noscript><div class="statcounter"><a class="statcounter" href="http://www.statcounter.com/"><img class="statcounter" src="http://c16.statcounter.com/counter.php?sc_project=1606388&amp;java=0&amp;security=48e465a6&amp;invisible=0" alt="free site statistics" /></a></div></noscript>
+<!-- End of StatCounter Code -->
+
+</div>
+
+</body>
+</html>

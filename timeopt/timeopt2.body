@@ -1,0 +1,90 @@
+##title##Practical Time-Optimal Trajectory Planning for Robots: a Convex Optimization Approach
+##location##Time-optimal trajectory planning
+##keywords##trajectory planning,convex optimal control,second order cone programming,path-constrained time-optimal control,path tracking,diederik,diederik verscheure,publications,robotics,contact dynamics,identification of contact dynamics,modelling,environment identification,environment impedance identification,environment contact dynamics identification
+##content##
+<h3>Practical Time-Optimal Trajectory Planning for Robots: a Convex
+Optimization Approach</h3>
+<ul>
+<li>Matlab implementation of the convex time-optimal trajectory planning method<br>
+applied to the examples found in:<br>
+Pfeiffer, F. & Johanni, R., A Concept for Manipulator Trajectory Planning,<br>
+IEEE Journal of Robotics and Automation, 1987, RA-3, 115-123.<br>
+<ul>
+<li>Zip archive: <a href="elbow.zip">elbow.zip</a></li>
+</ul></li>
+<li>Matlab implementation of the convex time-optimal trajectory planning method<br>
+applied to the KUKA 361 industrial manipulator carrying out a writing task.<br>
+<ul>
+<li>Zip archive: <a href="http://www.downloadcounter.com/cgi-bin/download.pl?username=diederikv&account=1">kuka361.zip</a></li>
+<li>Video: <a href="kuka361.avi">kuka361.avi</a><br>
+(12 MB. Should work without special codecs)</li>
+<li>Explanation:<br>
+<a href="kuka361.png"><img src="kuka361_thumb.png"></a><br>
+Fig. 1: A six-DOF KUKA 361 industrial manipulator performing a writing task.<br><br>
+To illustrate the practicality of the method, it is applied to a<br>
+six-DOF KUKA 361 industrial manipulator carrying out a writing task<br>
+(Fig. 1). The objective is to write a text on a plane<br>
+parallel to the XY-plane (Fig. 1), while keeping the<br>
+end-effector oriented in the negative Z-direction at a height of z = 1.2 m.<br>
+
+<a href="kuka361_optecpath_2d.png"><img src="kuka361_optecpath_2d_thumb.png"></a><br>
+Fig. 2: The path in the plane parallel to the XY-plane.<br><br>
+
+The end-effector path parallel to the XY-plane is shown separately<br>
+in Fig. 2, where the value of the path coordinate s in [0,1] along the<br>
+path is shown in steps of 0.05. The motivation for choosing this type of<br>
+path is that it features long smooth segments as well as sharp edges<br>
+at the transitions between different character segments. Therefore, a<br>
+lot of switching is expected to realize the time-optimal trajectory<br>
+such that the grid on which the problem is solved needs to be<br>
+sufficiently fine.<br><br>
+
+<a href="kuka361_torquepath_optecpath_0_0.png"><img src="kuka361_torquepath_optecpath_0_0_thumb.png"></a><br>
+Fig. 3: The joint torques as a function of the path coordinate<br>
+for the first three axes for the path shown in Fig. 1<br><br>
+
+The torques for the more heavily loaded first three axes<br>
+are shown as a function of the path coordinate s in Fig. 3 (s = 0.55 ... 0.8).<br>
+Fig. 3 indicates that a lot of switching is necessary and that the torque for<br>
+axis two, which is heavily loaded by gravity, is saturated for a<br>
+considerable part along the path and therefore the main limitation on<br>
+the acceleration and deceleration ability of the manipulator.<br><br>
+
+<a href="kuka361_jointvelpath_optecpath_0_0.png"><img src="kuka361_jointvelpath_optecpath_0_0_thumb.png"></a><br>
+Fig. 4: The joint velocities as a function of the path coordinate<br>
+for the first three axes for the path shown in Fig. 1<br><br>
+
+To explain the torques, it is useful to look at the joint velocities<br>
+for the first three axes as a function of the path coordinate, which<br>
+are shown in Fig. 4 for s = 0.55 ... 0.8.  Until s = 0.66, the motion<br>
+of the end-effector is outward such that axis two rotates downward, which<br>
+corresponds to a positive joint velocity, while axis three rotates<br>
+upward which corresponds to a negative joint velocity (Fig. 1). At<br>
+s = 0.66, there is a velocity reversal for axes two and three and from<br>
+then on, the end-effector motion is inward and even faster than the outward<br>
+motion (Fig. 4).  This can be explained as follows. The torque acting on axis<br>
+two due to gravity is also downward and thus aids axis two in the acceleration<br>
+phase around s = 0.59 ... 0.61. In this phase, the torque of axis two is positive<br>
+and saturated to achieve a maximum acceleration. However, because the path<br>
+dictates that there must be a velocity reversal for axis two around<br>
+s = 0.66, the velocity of axis two needs to be limited, because the<br>
+gravity torque acting on axis two also limits the deceleration ability.<br>
+It can be seen in Fig. 4 that the velocity for axis two is indeed limited<br>
+between s = 0.61 ... 0.64 and that the torque for axis two is both positive<br>
+and negative. For s = 0.64 ... 0.66, the torque for axis two is negative and<br>
+saturated to achieve a maximum deceleration. Similarly, at s = 0.79, there<br>
+is another velocity reversal for axis two and three, which is again dictated<br>
+by the path. However, for s = 0.7 ... 0.78 the velocity of axis two and three is<br>
+considerably higher, which is partly because the inward motion is over<br>
+a greater distance, but also because the gravity torque acting on axis<br>
+two aids axis two in the deceleration phase. It can be seen that the<br>
+torque for axis two is not saturated during the entire deceleration<br>
+phase for s = 0.78 ... 0.8, unlike the acceleration phase for<br>
+s = 0.69 ... 0.73. In part, this is also caused by the outward position<br>
+of the end-effector, such that axis one requires more torque to decelerate
+and that hence, switching between axis two and one is required in the<br>
+deceleration phase for s = 0.78 ... 0.8.<br>
+</li>
+
+</ul></li>
+</ul>

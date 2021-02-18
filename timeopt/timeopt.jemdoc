@@ -1,0 +1,118 @@
+# jemdoc: menu{MENU}{../timeopt/timeopt.html}
+= Time-Optimal Path Tracking for Robots: a Convex Optimization Approach
+
+== Time-Optimal Path Tracking for Robots: a Convex Optimization Approach
+
+~~~
+If you decide to use this software for your research, please refer to the journal paper
+and not to this webpage, since the location of this page may change in the future.\n
+In the meantime, an abbreviated discussion of the algorithm can be found in [../papers/timeenergy.pdf this paper]. 
+~~~
+
+~~~
+@ARTICLE{verscheure08,\n
+  AUTHOR = {Verscheure, Diederik and Demeulenaere, Bram and Swevers, Jan and De Schutter, Joris and Diehl, Moritz},\n
+  TITLE = {Time-Optimal Path Tracking for Robots: a Convex Optimization Approach},\n
+  JOURNAL = {IEEE Transactions on Automatic Control},\n
+  YEAR = {2008},\n
+  NOTE = {Accepted}\n
+}
+~~~
+
+~~~
+Matlab implementation of the convex time-optimal path tracking method
+applied to the examples found in:\n
+Pfeiffer, F. & Johanni, R., A Concept for Manipulator Trajectory Planning,\n
+IEEE Journal of Robotics and Automation, 1987, RA-3, 115-123.\n
+\n
+Zip archive: [elbow.zip elbow.zip]
+~~~
+
+~~~
+Matlab implementation of the convex time-optimal path tracking method
+applied to the example found in:\n
+Shiller, Z. & Lu, H.-H., Computation of Path Constrained Time Optimal\n
+Motions with Dynamic Singularities, Transactions of the ASME, Journal of\n
+Dynamic Systems, Measurement, and Control, 1992, 114, 34-40\n
+\n
+Zip archive: [twolink.zip twolink.zip]
+~~~
+
+~~~
+Matlab implementation of the convex time-optimal path tracking method
+applied to the KUKA 361 industrial manipulator carrying out a writing task.\n
+\n
+Zip archive: [kuka361.zip kuka361.zip]\n
+{{<a href="kuka361.avi"><img width="30%" src="kuka361-framegrab.jpg" alt="OPTEC writing task"/></a><br>}}
+Simulation video: [kuka361.avi kuka361.avi] (12 Mb. MSMPEG4v2) or [kuka361.mpg kuka361.mpg] (4.5 Mb. MPEG-2)\n
+{{<a href="kuka361-exp.avi"><img width="30%" src="optec-framegrab.jpg" alt="OPTEC writing task"/></a><br>}}
+Experimental video: [kuka361-exp.avi kuka361-exp.avi] (5.4 Mb. MSMPEG4v2) or [kuka361-exp.mpg kuka361-exp.mpg] (3.4 Mb. MPEG-1)\n\n
+The video shows the case of a KUKA 361 manipulator writing "Optec" (acronym for
+[http://homes.esat.kuleuven.be/~optec/ Optimization in Engineering Center])
+~~~
+
+~~~
+Explanation:\n
+{{<a href="kuka361.png"><img src="kuka361_thumb.png"></a><br>}}
+Fig. 1: A six-DOF KUKA 361 industrial manipulator performing a writing task.\n
+\n
+To illustrate the practicality of the method, it is applied to a
+six-DOF KUKA 361 industrial manipulator carrying out a writing task
+(Fig. 1). The objective is to write a text on a plane
+parallel to the XY-plane (Fig. 1), while keeping the
+end-effector oriented in the negative Z-direction at a height of z = 1.2 m.\n
+\n
+
+{{<a href="kuka361_optecpath_2d.png"><img src="kuka361_optecpath_2d_thumb.png"></a><br>}}
+Fig. 2: The path in the plane parallel to the XY-plane.\n
+\n
+The end-effector path parallel to the XY-plane is shown separately
+in Fig. 2, where the value of the path coordinate s in [0,1] along the
+path is shown in steps of 0.05. The motivation for choosing this type of
+path is that it features long smooth segments as well as sharp edges
+at the transitions between different character segments. Therefore, a
+lot of switching is expected to realize the time-optimal trajectory
+such that the grid on which the problem is solved needs to be
+sufficiently fine.\n
+\n
+{{<a href="kuka361_torquepath_optecpath_0_0.png"><img src="kuka361_torquepath_optecpath_0_0_thumb.png"></a><br>}}
+Fig. 3: The joint torques as a function of the path coordinate\n
+for the first three axes for the path shown in Fig. 1.\n
+\n
+The torques for the more heavily loaded first three axes
+are shown as a function of the path coordinate s in Fig. 3 (s = 0.55 ... 0.8).
+Fig. 3 indicates that a lot of switching is necessary and that the torque for
+axis two, which is heavily loaded by gravity, is saturated for a
+considerable part along the path and therefore the main limitation on
+the acceleration and deceleration ability of the manipulator.\n
+\n
+{{<a href="kuka361_jointvelpath_optecpath_0_0.png"><img src="kuka361_jointvelpath_optecpath_0_0_thumb.png"></a><br>}}
+Fig. 4: The joint velocities as a function of the path coordinate\n
+for the first three axes for the path shown in Fig. 1\n
+
+To explain the torques, it is useful to look at the joint velocities
+for the first three axes as a function of the path coordinate, which
+are shown in Fig. 4 for s = 0.55 ... 0.8.  Until s = 0.66, the motion
+of the end-effector is outward such that axis two rotates downward, which
+corresponds to a positive joint velocity, while axis three rotates
+upward which corresponds to a negative joint velocity (Fig. 1). At
+s = 0.66, there is a velocity reversal for axes two and three and from
+then on, the end-effector motion is inward and even faster than the outward
+motion (Fig. 4).  This can be explained as follows. The torque acting on axis
+two due to gravity is also downward and thus aids axis two in the acceleration
+phase around s = 0.59 ... 0.61. In this phase, the torque of axis two is positive
+and saturated to achieve a maximum acceleration. However, because the path
+dictates that there must be a velocity reversal for axis two around
+s = 0.66, the velocity of axis two needs to be limited, because the
+gravity torque acting on axis two also limits the deceleration ability.
+It can be seen in Fig. 4 that the velocity for axis two is indeed limited
+between s = 0.61 ... 0.64 and that the torque for axis two is both positive
+and negative. For s = 0.64 ... 0.66, the torque for axis two is negative and
+saturated to achieve a maximum deceleration. Similarly, at s = 0.79, there
+is another velocity reversal for axis two and three, which is again dictated
+by the path. However, for s = 0.7 ... 0.78 the velocity of axis two and three is
+considerably higher, which is partly because the inward motion is over
+a greater distance, but also because the gravity torque acting on axis
+two aids axis two in the deceleration phase. 
+~~~
+

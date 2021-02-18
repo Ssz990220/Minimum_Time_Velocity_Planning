@@ -1,0 +1,9 @@
+#!/bin/bash
+for i in *.png; do
+	echo "$i" | grep thumb > /dev/null
+	if [ $? = 0 ]; then
+		echo "$i is already a thumnail..."
+	else
+		convert "$i" -resize 400 "${i/.png/_thumb.png}"
+	fi
+done
