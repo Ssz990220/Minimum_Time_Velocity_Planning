@@ -1,7 +1,8 @@
 function  display_forward(b_slope, b_intercept, f_slope, f_intercept, u_hat)
 %DISPLAY_FORWARD Summary of this function goes here
 %   Detailed explanation goes here
-xx = u_hat * 1.1;
+% xx = u_hat * 2;
+xx =u_hat * 2;
 
 xx = linspace(0,xx,500);
 

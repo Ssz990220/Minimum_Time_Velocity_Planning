@@ -112,7 +112,6 @@ for m = 1:length(gamma2)
 	bm = (b(2:end)+b(1:end-1))/2;
 	qdot = repmat(sqrt(bm),6,1).*qp;
 	qddot = repmat(a,6,1).*qp + repmat(bm,6,1).*qpp;
-
 	% Save result for trade-off curve.
 	if length(gamma1) >= length(gamma2)
 		ts(l) = t(end);

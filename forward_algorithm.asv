@@ -12,23 +12,17 @@ function [u_i,u_i1] = forward_algorithm(ds, cs, gs, qs, qds, qdds, s, phi, alpha
         b_intercept=zeros(size(ds,2)*2+1,1);
         f_intercept = zeros(size(ds,2)*2,1);
         u_i1_upper = min(phi.^2/qds(i+1,:).^2);
-%         b_func = cell(size(ds,2)*2 + 1);
-%         f_func = cell(size(ds,2)*2);
         
         for j = 1:size(ds,2)
             if (ds(i,j)*cs(i,j) == 0)
                 if ((ds(i,j)==0) && (cs(i,j)==0))
                     b_slope((j-1)*2+1) = inf;
                     f_slope((j-1)*2+1) = -inf;
-    %                 b_func((j-1)*2+1) = {inf};
-    %                 f_func((j-1)*2+1) = {-inf};
 
                 end
                 if ((ds(i,j)==0) && (cs(i,j)~=0))
                     b_slope((j-1)*2+1) = inf;
                     f_slope((j-1)*2+1) = -inf;
-    %                 b_func((j-1)*2+1) ={ inf};
-    %                 f_func((j-1)*2+1) = {-inf};
                     u_i1_upper = min(u_upper, (mu(j)-gs(i,j))/abs(c(i,j)));
                 end
             end
@@ -37,29 +31,21 @@ function [u_i,u_i1] = forward_algorithm(ds, cs, gs, qs, qds, qdds, s, phi, alpha
                 f_slope((j-1)*2+1) = b_slope((j-1)*2+1);
                 b_intercept((j-1)*2+1) = abs((2*h*(mu(j)-gs(i,j)))/(ds(i,j)+2*h*cs(i,j)));
                 f_intercept((j-1)*2+1) = -b_intercept((j-1)*2+1);
-%                 b_func((j-1)*2+1) = {@(x) b_slope(j)*x + abs((2*h*(mu(j)-gs(i,j)))/(ds(i,j)+2*h*cs(i,j)))};
-%                 f_func((j-1)*2+1) = {@(x)  f_slope(j) *x-abs((2*h*(mu(j)-gs(i,j)))/(ds(i,j)+2*h*cs(i,j)))};
             end
             if (ds(i,j)*cs(i,j)<0)
                 b_slope((j-1)*2+1)=(ds(i,j)-2*h*cs(i,j))/ds(i,j);
                 f_slope((j-1)*2+1) = b_slope((j-1)*2+1);
                 b_intercept((j-1)*2+1) = abs((2*h*(mu(j)+gs(i,j)))/ds(i,j));
                 f_intercept((j-1)*2+1) = -b_intercept((j-1)*2+1);
-%                 b_func((j-1)*2+1) = {@(x) b_slope(j)*x + abs((2*h*(mu(j)+gs(i,j)))/ds(i,j))};
-%                 f_func((j-1)*2+1) = {@(x)  f_slope(j) *x-abs((2*h*(mu(j)+gs(i,j)))/ds(i,j))};
             end
             if (qds(i,j)*qdds(i,j)==0)
                 if ((qds(i,j) ==0) && (qdds(i,j)==0)) 
                     b_slope((j-1)*2+2) = inf;
                     f_slope((j-1)*2+2) = -inf;
-    %                 b_func((j-1)*2+2) = {inf};
-    %                 f_func((j-1)*2+2) = {-inf};
                 end
                 if ((qds(i,j)==0)&&(qdds~=0))
                     b_slope((j-1)*2+2) = inf;
                     f_slope((j-1)*2+2) = -inf;
-    %                 b_func((j-1)*2+2) = {inf};
-    %                 f_func((j-1)*2+2) = {-inf};
                     u_i1_upper = {min(u_i1_upper,alpha(j)/abs(qdds(i,j)))};
                 end
             end
@@ -98,7 +84,7 @@ function [u_i,u_i1] = forward_algorithm(ds, cs, gs, qs, qds, qdds, s, phi, alpha
             end
             z_bar = f_slope(f_order(j))*x+f_intercept(f_order(j));
             x = (f_slope(f_order(j))*b_intercept(b_order(m)) + f_intercept(f_order(j)))/(1-f_slope(f_order(j))*b_slope(b_order(m)));
-            disp(f_slope(f_order(j)) * x + f_intercept
+            disp((f_slope(f_order(j))*(b_slope(b_order(m))*x + b_intercept(b_order(m)))+f_intercept(f_order(j)))==x);
         end
 %         display_forward(b_slope, b_intercept,f_slope,f_intercept,x);
         u_i(i) = x;
