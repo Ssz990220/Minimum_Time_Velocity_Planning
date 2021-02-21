@@ -1,6 +1,6 @@
 clear;
 clc;
-n_points = 200;
+n_points = 1000;
 phi = [2.0,2.0,2.0];          % velocity limit
 alpha = [1.5,1.5,1.5];     % acceleration limit
 mu = [9, 9, 9];        % torque limit
