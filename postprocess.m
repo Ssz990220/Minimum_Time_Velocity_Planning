@@ -3,7 +3,8 @@ function [t,tau, qd_t, qdd_t] = postprocess(ds, cs, gs, b, qs, qds, qdds, s)
 %   Detailed explanation goes here
 h = s(2) - s(1);
 [xyz, xyz_] = quadratic_interp(b, h);
-a = get_a(xyz, xyz_, s(1:end-1),h);
+a = (b(2:end)-b(1:end-1))/(2*h);
+% a = get_a(xyz, xyz_, s(1:end-1),h);
 ds = ds(1:end-1,:);
 cs = cs(1:end-1,:);
 gs = gs(1:end-1,:);

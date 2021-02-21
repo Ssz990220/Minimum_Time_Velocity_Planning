@@ -5,7 +5,8 @@ function a= get_a(xyz, xyz_,a_coor_s,h)
 %   xyz_, interpolation data for derivative of curve b
 %   a_coor_s, s coordinate for a
     a_idx = round(a_coor_s/h)+1;
-    a = xyz_(a_idx)+xyz_(a_idx+size(xyz_,1)).*a_coor_s;
+    delta = a_coor_s - (a_idx-1)*h;
+    a = xyz_(a_idx)+xyz_(a_idx+size(xyz_,1)).*delta;
     a = a';
 end
 
