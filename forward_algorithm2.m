@@ -1,8 +1,8 @@
-function [u_i,u_i1] = forward_algorithm2(ds, cs, gs, qs, qds, qdds, s, phi, alpha, mu)
+function u = forward_algorithm2(ds, cs, gs, qs, qds, qdds, s, phi, alpha, mu)
 %FORWARD_ALGORITHM Summary of this function goes here
 %   Detailed explanation goes here
-    u_i = zeros(size(ds,1)-1,1);
-    u_i1 = zeros(size(ds,1)-1,1);
+    u = zeros(size(ds,1)-1,1);
+%     u_i1 = zeros(size(ds,1)-1,1);
     
 %     y_z = zeros(size(ds, 1)-1,1);
     h = s(2)-s(1);
@@ -75,11 +75,15 @@ function [u_i,u_i1] = forward_algorithm2(ds, cs, gs, qs, qds, qdds, s, phi, alph
 %                 f_inv_intercept((j-1)*2+2) = -b_intercept((j-1)*2+2);
             end      
         end
+        if i ==(size(s,2)-1)
+            u_i1_upper = 0;
+        end
         b_slope(end) = 0;
         b_intercept(end) = u_i1_upper;
-        x = min(phi.^2./qds(i,:).^2);
+        x = u(i);
         if i == 1
-            x = 0;
+%             x = min(phi.^2./qds(1,:).^2);
+                x = 0;
         end
         
         while y_bar < z_bar
@@ -93,11 +97,7 @@ function [u_i,u_i1] = forward_algorithm2(ds, cs, gs, qs, qds, qdds, s, phi, alph
             x = (1/f_inv_slope(idx_f))*b_intercept(idx_b) + (-f_inv_intercept(idx_f)/f_inv_slope(idx_f))/(1-1/f_inv_slope(idx_f)*b_slope(idx_b));
 %             display_forward(b_slope, b_intercept, f_inv_slope, f_inv_intercept, x);
         end
-        u_i(i) = x_pre;
-        u_i1(i) = y_bar;
-        if i == size(s,2)-1
-            u_i1(i) = 0;
-        end
+        u(i) = x_pre;
+        u(i+1) = y_bar;
     end
-        
 end

@@ -1,7 +1,6 @@
-function b = backward_algorithm(ds, cs, gs, qs, qds, qdds, s, phi, alpha, mu, u_i, u_i1)
+function b = backward_algorithm(ds, cs, gs, qs, qds, qdds, s, phi, alpha, mu, u)
 %BACKWARD_ALGORITHM Summary of this function goes here
 %   Detailed explanation goes here
-    b = zeros(size(ds,1)-1,1);
     h = s(2)-s(1);
     for i = size(s,2)-1:-1:1
         f_slope=zeros(size(ds,2)*2,1);
@@ -40,8 +39,9 @@ function b = backward_algorithm(ds, cs, gs, qs, qds, qdds, s, phi, alpha, mu, u_
                 f_intercept((j-1)*2+2) = abs(2*h*alpha(j)/(qds(i,j)-2*h*qdds(i,j)));
             end
         end
-        f = f_slope * u_i1(i) + f_intercept;
-        b(i) = min(min(f), u_i(i));
-    end           
+        f = f_slope * u(i+1) + f_intercept;
+        u(i) = min(min(f), u(i));
+    end
+    b = u;
 end
 
