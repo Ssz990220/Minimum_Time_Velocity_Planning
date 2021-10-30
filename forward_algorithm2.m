@@ -86,7 +86,9 @@ function u = forward_algorithm2(ds, cs, gs, qs, qds, qdds, s, phi, alpha, mu)
                 x = 0;
         end
         
+        j=0;
         while y_bar < z_bar
+            j = j+1;
             b = b_slope*x+b_intercept;
             f = f_inv_slope * x + f_inv_intercept;
             [y_bar, idx_b] = min(b);
@@ -95,7 +97,7 @@ function u = forward_algorithm2(ds, cs, gs, qs, qds, qdds, s, phi, alpha, mu)
 %             y_z(i) = y_bar - z_bar;
             x_pre = x;
             x = (1/f_inv_slope(idx_f))*b_intercept(idx_b) + (-f_inv_intercept(idx_f)/f_inv_slope(idx_f))/(1-1/f_inv_slope(idx_f)*b_slope(idx_b));
-%             display_forward(b_slope, b_intercept, f_inv_slope, f_inv_intercept, x);
+%             display_forward(b_slope, b_intercept, f_inv_slope, f_inv_intercept, x, strcat(string(i),'-',string(j)));
         end
         u(i) = x_pre;
         u(i+1) = y_bar;

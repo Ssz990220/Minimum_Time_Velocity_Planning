@@ -1,4 +1,7 @@
-function  display_forward(b_slope, b_intercept, f_slope, f_intercept, u_hat)
+function  display_forward(b_slope, b_intercept, f_slope, f_intercept, u_hat, idx)
+if nargin == 5
+    idx = '';
+end
 %DISPLAY_FORWARD Summary of this function goes here
 %   Detailed explanation goes here
 % xx = u_hat * 2;
@@ -6,6 +9,7 @@ xx =u_hat * 2;
 
 xx = linspace(0,xx,500);
 
+% f = figure('Visible','off');
 figure
 hold on
 ys = zeros(size(b_slope,1),size(xx,2));
@@ -31,6 +35,6 @@ x_line = linspace(0,max(max(y_max), max(max(ys))),500);
 plot(ones(1,500)*u_hat, x_line,'y');
 crosspoint = [u_hat * b_slope + b_intercept;u_hat * f_slope + f_intercept];
 plot(ones(1,size(crosspoint,1))*u_hat, crosspoint,'o');
-
+% saveas(f,strcat('./Experiment/',string(idx),'.jpg'));
 end
 
